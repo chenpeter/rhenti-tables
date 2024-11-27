@@ -13,10 +13,13 @@ import { CsvService } from '../services/csv.service';
     <div *ngIf="isBrowser">
       <input type="file" (change)="onFileSelected($event)" accept=".csv">
       <ag-grid-angular
-        style="width: 100%; height: 500px;"
+        style="width: 100%; height: 90dvh;"
         class="ag-theme-quartz"
         [rowData]="rowData"
-        [columnDefs]="colDefs">
+        [columnDefs]="colDefs"
+        [pagination]="pagination"
+        [paginationPageSize]="paginationPageSize"
+        [paginationPageSizeSelector]="paginationPageSizeSelector">
       </ag-grid-angular>
     </div>
     <div *ngIf="!isBrowser">Loading...</div>
@@ -26,6 +29,9 @@ export class TablesComponent implements OnInit {
   isBrowser: boolean;
   rowData: any[] = [];
   colDefs: ColDef[] = [];
+  pagination = true;
+  paginationPageSize = 20;
+  paginationPageSizeSelector = [20, 50, 100, 500];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
